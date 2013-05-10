@@ -17,8 +17,8 @@ development:
   encoding: unicode
   database: cinematron_development
   pool: 5
-  username: postgres
-  password: 7481592630
+  username: <%= ENV["ADMIN_NAME"] %>
+  password: <%= ENV["ADMIN_PASSWORD"] %>
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -43,13 +43,13 @@ test:
   encoding: unicode
   database: cinematron_test
   pool: 5
-  username: postgres
-  password: 7481592630
+  username: <%= ENV["ADMIN_NAME"] %>
+  password: <%= ENV["ADMIN_PASSWORD"] %>
 
 production:
   adapter: postgresql
   encoding: unicode
   database: cinematron_production
   pool: 5
-  username: postgres
-  password: 7481592630
+  username: <%= ENV["ADMIN_NAME"] %>
+  password: <%= ENV["ADMIN_PASSWORD"] %>
