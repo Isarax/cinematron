@@ -8,7 +8,7 @@
 #  trailer      :string(255)
 #  min_age      :integer
 #  length       :integer
-#  release_date :date
+#  release_date :integer
 #  budget       :integer
 #  info         :text
 #  created_at   :datetime         not null

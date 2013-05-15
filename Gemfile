@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '1.9.3'
 gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
@@ -9,7 +10,7 @@ gem 'pg'
 gem 'jquery-rails'
 gem 'figaro'
 gem 'devise'
-gem 'simple_form'
+gem 'heroku'
 
 # Gems used only for assets and not required
 # in production environments by default.
