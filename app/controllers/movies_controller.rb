@@ -24,7 +24,7 @@ class MoviesController < ApplicationController
   # GET /movies/new
   # GET /movies/new.json
   def new
-    @movie = Movie.new
+    @movie = Movie.new(people: [Person.new])
 
     respond_to do |format|
       format.html # new.html.erb

@@ -1,10 +1,11 @@
+<% title @movie.name %>
 <%- model_class = Movie -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => @movie.name %></h1>
+  <h2><%= yield :title %></h2>
 </div>
 
 <div class="image">
-  <img src= <%= @movie.poster %>>
+  <img src= <%= @movie.poster %> class="img-rounded">
 </div>
 
 <div class="trailer">

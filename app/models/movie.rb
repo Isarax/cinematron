@@ -16,12 +16,16 @@
 #
 
 class Movie < ActiveRecord::Base
-  attr_accessible :name, :poster, :trailer, :min_age, :release_date, :length, :budget, :info
+  attr_accessible :name, :poster, :trailer, :min_age, :release_date, :length, :budget, :info, :people, :people_attributes
 
-  #validation
-  validates :name, presence: true, uniqueness: true, length: {maximum: 50}
-  validates :min_age, presence: true, numericality: {only_integer: true}, inclusion: {in: 0..21}
+  has_and_belongs_to_many :people
+
+  accepts_nested_attributes_for :people
+
+  # Validation
+  validates :name, presence: true, length: { maximum: 50 } #, uniqueness: true
+  validates :min_age, presence: true, numericality: { only_integer: true }, inclusion: { in: 0..21 }
   validates :release_date, presence: true
-  validates :length, presence: true, inclusion: {in: 0..400}
-  validates :budget, presence: true
+  validates :length, presence: true, numericality: { only_integer: true }, inclusion: { in: 0..400 }
+  validates :budget, presence: true, numericality: { only_integer: true }
 end

@@ -1,56 +1,60 @@
-<%= form_for @movie, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name, :class => 'text_field' %>
-    </div>
+<div class="row">
+  <div class="span5 offset1">
+    <% if @movie.errors.any? %>
+      <div class="alert alert-error">
+        The form contains errors.
+      </div>
+    <% end %>
   </div>
-  <div class="control-group">
-    <%= f.label :poster, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :poster, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :trailer, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :trailer, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :min_age, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :min_age, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :length, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :length, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :release_date, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.date_select :release_date, :class => 'date_select' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :budget, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.number_field :budget, :class => 'number_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :info, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :info, :class => 'text_area input-xxlarge', :rows => 5, :placeholder => 'Movie description...' %>
-    </div>
-  </div>
+</div>
+
+</br>
+<%= form_for @movie, html: { class: 'form-horizontal' } do |f| %>
+  <%= field_helper(f, @movie, :name) do %>
+    <% f.text_field :name %>
+  <% end %>
+
+  <%= field_helper(f, @movie, :poster) do %>
+    <% f.text_field :poster %>
+  <% end %>
+
+  <%= field_helper(f, @movie, :trailer) do %>
+    <% f.text_field :trailer %>
+  <% end %>
+
+  <%= field_helper(f, @movie, :min_age) do %>
+    <% f.number_field :min_age %>
+  <% end %>
+
+  <%= field_helper(f, @movie, :length) do %>
+    <% f.number_field :length %>
+  <% end %>
+
+  <%= field_helper(f, @movie, :release_date) do %>
+    <% f.number_field :release_date %>
+  <% end %>
+
+  <%= field_helper(f, @movie, :budget) do %>
+    <% f.number_field :budget %>
+  <% end %>
+
+  <%= field_helper(f, @movie, :info) do %>
+    <% f.text_area :info, class: 'input-xxlarge',
+                                rows: 5,
+                                placeholder: 'Movie description...' %>
+  <% end %>
+
+  <%= f.fields_for :people do |people_form| %>
+    <%= people_form.label :first_name %>
+    <%= people_form.text_field :first_name %>
+    <%= people_form.label :middle_name %>
+    <%= people_form.text_field :middle_name %>
+    <%= people_form.label :last_name %>
+    <%= people_form.text_field :last_name %>
+  <% end %>
 
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                movies_path, :class => 'btn' %>
+    <%= f.submit nil, class: 'btn btn-primary' %>
+    <%= link_to t('.cancel', default: t("helpers.links.cancel")), movies_path, class: 'btn' %>
   </div>
 <% end %>
