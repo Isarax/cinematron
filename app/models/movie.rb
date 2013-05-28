@@ -16,11 +16,13 @@
 #
 
 class Movie < ActiveRecord::Base
-  attr_accessible :name, :poster, :trailer, :min_age, :release_date, :length, :budget, :info, :people, :people_attributes
+  attr_accessible :name, :poster, :trailer, :min_age, :release_date, :length, :budget, :info, :country_id, :creators_attributes, :people
 
-  has_and_belongs_to_many :people
+  belongs_to :country
+  has_many :creators
+  has_many :people, through: :creators
 
-  accepts_nested_attributes_for :people
+  accepts_nested_attributes_for :creators, :people
 
   # Validation
   validates :name, presence: true, length: { maximum: 50 } #, uniqueness: true
@@ -28,4 +30,12 @@ class Movie < ActiveRecord::Base
   validates :release_date, presence: true
   validates :length, presence: true, numericality: { only_integer: true }, inclusion: { in: 0..400 }
   validates :budget, presence: true, numericality: { only_integer: true }
+
+  def self.profession(name)
+    Person.joins(:movies).where('creators.profession_id = (?)', Profession.where(name: name).first.id)
+  end
+
+  def profession(name)
+    Person.joins(:movies).where('creators.profession_id = (?)', Profession.where(name: name).first.id).where(movies: { name: self.name })
+  end
 end

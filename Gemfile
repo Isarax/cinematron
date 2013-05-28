@@ -29,6 +29,7 @@ end
 
 group :development do
   gem 'annotate'
+  gem 'hirb'
 end
 
 # To use ActiveModel has_secure_password

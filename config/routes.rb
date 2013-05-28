@@ -1,14 +1,12 @@
 Cinematron::Application.routes.draw do
-  resources :people
-
 
   root :to => 'home#index'
 
-  devise_for :users
-
-  get "users/new"
-
   resources :movies
+  resources :people
+
+  devise_for :users
+  get "users/new"
 
 
   #get "home/index"

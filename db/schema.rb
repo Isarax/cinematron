@@ -11,12 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130514103016) do
+ActiveRecord::Schema.define(:version => 20130514101848) do
 
   create_table "countries", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "creators", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "profession_id"
+    t.integer  "movie_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "movies", :force => true do |t|
@@ -28,16 +36,10 @@ ActiveRecord::Schema.define(:version => 20130514103016) do
     t.integer  "release_date"
     t.integer  "budget"
     t.text     "info"
+    t.integer  "country_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
-
-  create_table "movies_people", :id => false, :force => true do |t|
-    t.integer "movie_id"
-    t.integer "person_id"
-  end
-
-  add_index "movies_people", ["movie_id", "person_id"], :name => "index_movies_people_on_movie_id_and_person_id", :unique => true
 
   create_table "people", :force => true do |t|
     t.string   "first_name"
@@ -48,13 +50,6 @@ ActiveRecord::Schema.define(:version => 20130514103016) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
-
-  create_table "people_professions", :id => false, :force => true do |t|
-    t.integer "person_id"
-    t.integer "profession_id"
-  end
-
-  add_index "people_professions", ["person_id", "profession_id"], :name => "index_people_professions_on_person_id_and_profession_id", :unique => true
 
   create_table "professions", :force => true do |t|
     t.string   "name"

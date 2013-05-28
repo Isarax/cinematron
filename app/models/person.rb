@@ -16,8 +16,9 @@ class Person < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :middle_name, :birth_date, :country_id, :profession_id
 
   belongs_to :country
-  has_and_belongs_to_many :professions
-  has_and_belongs_to_many :movies
+  has_many :creators
+  has_many :professions, through: :creators
+  has_many :movies, through: :creators
 
   def to_s
     first_name.to_s + ' ' + middle_name.to_s + ' ' + last_name.to_s

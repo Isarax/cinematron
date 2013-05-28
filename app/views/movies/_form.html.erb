@@ -10,39 +10,49 @@
 
 </br>
 <%= form_for @movie, html: { class: 'form-horizontal' } do |f| %>
-  <%= field_helper(f, @movie, :name) do %>
+
+  <%= render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :name } do %>
     <% f.text_field :name %>
   <% end %>
 
-  <%= field_helper(f, @movie, :poster) do %>
+  <%= render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :poster } do %>
     <% f.text_field :poster %>
   <% end %>
 
-  <%= field_helper(f, @movie, :trailer) do %>
+  <%= render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :trailer } do %>
     <% f.text_field :trailer %>
   <% end %>
 
-  <%= field_helper(f, @movie, :min_age) do %>
+  <%= render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :min_age } do %>
     <% f.number_field :min_age %>
   <% end %>
 
-  <%= field_helper(f, @movie, :length) do %>
+  <%= render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :length } do %>
     <% f.number_field :length %>
   <% end %>
 
-  <%= field_helper(f, @movie, :release_date) do %>
+  <%= render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :release_date } do %>
     <% f.number_field :release_date %>
   <% end %>
 
-  <%= field_helper(f, @movie, :budget) do %>
+  <%= render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :budget } do %>
     <% f.number_field :budget %>
   <% end %>
 
-  <%= field_helper(f, @movie, :info) do %>
+  <%= render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :info } do %>
     <% f.text_area :info, class: 'input-xxlarge',
                                 rows: 5,
                                 placeholder: 'Movie description...' %>
   <% end %>
+
+  <%= render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :country } do %>
+    <% collection_select(:country, :id, @countries, :id, :name, include_blank: true) %>
+  <% end %>
+
+  <%= f.fields_for :creators do |builder| %>
+    <%= render 'creator_fields', f: builder %>
+  <% end %>
+  <%= link_to_add_fields 'add', f, :creators %>  
 
   <div class="form-actions">
     <%= f.submit nil, class: 'btn btn-primary' %>

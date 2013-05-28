@@ -14,6 +14,7 @@ class MoviesController < ApplicationController
   # GET /movies/1.json
   def show
     @movie = Movie.find(params[:id])
+    @actors = @movie.profession('actor')
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +26,7 @@ class MoviesController < ApplicationController
   # GET /movies/new.json
   def new
     @movie = Movie.new(people: [Person.new])
+    @countries = Country.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,18 +37,22 @@ class MoviesController < ApplicationController
   # GET /movies/1/edit
   def edit
     @movie = Movie.find(params[:id])
+    @countries = Country.all
   end
 
   # POST /movies
   # POST /movies.json
   def create
+    debugger
     @movie = Movie.new(params[:movie])
+    @movie.country = Country.find(params['country']['id'])
 
     respond_to do |format|
       if @movie.save
         format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
         format.json { render json: @movie, status: :created, location: @movie }
       else
+        @countries = Country.all
         format.html { render action: "new" }
         format.json { render json: @movie.errors, status: :unprocessable_entity }
       end

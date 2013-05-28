@@ -1,19 +1,40 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# Countries
 
-countries = ['USA', 'UK']
+countries = ['USA', 'UK', 'France', 'Italy', 'Russia', 'Japan']
 
 countries.each do |country|
   Country.new(name: country).save
 end
 
+# Professions
+
 professions = ['actor', 'screenwriter', 'director', 'producer']
 
 professions.each do |profession|
   Profession.new(name: profession).save
+end
+
+
+# Movies
+
+number = 1
+min_age = 1
+length = 30
+budget = 10000
+release_date = 1980
+
+20.times do
+  Movie.new do |m|
+    m.name = 'Movie' + number.to_s
+    m.min_age = min_age
+    m.length = length
+    m.budget = budget
+    m.release_date = release_date
+  end.save
+
+  number += 1
+  min_age +=1
+  length += 10
+  budget += 5000
+  release_date +=1
 end

@@ -10,7 +10,10 @@ class CreateMovies < ActiveRecord::Migration
       t.integer :budget
       t.text :info
 
+      t.references :country, index: true
+
       t.timestamps
     end
   end
 end
+  

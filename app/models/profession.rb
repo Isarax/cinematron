@@ -11,5 +11,8 @@
 class Profession < ActiveRecord::Base
   attr_accessible :name
 
-  has_and_belongs_to_many :people
+  validates :name, presence: true , uniqueness: true, length: { maximum: 50 }
+
+  has_one :creator
+  has_many :people, through: :creators
 end
