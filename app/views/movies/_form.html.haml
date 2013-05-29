@@ -1,0 +1,49 @@
+.row
+  .span5.offset1
+    - if @movie.errors.any?
+      .alert.alert-error
+        The form contains errors.
+
+%br
+= form_for @movie, html: { class: 'form-horizontal' } do |f|
+
+  = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :name } do
+    - f.text_field :name
+
+  = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :poster } do
+    - f.text_field :poster
+
+  = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :trailer } do
+    - f.text_field :trailer
+
+  = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :min_age } do
+    - f.number_field :min_age
+
+  = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :length } do
+    - f.number_field :length
+
+  = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :release_date } do
+    - f.number_field :release_date
+
+  = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :budget } do
+    - f.number_field :budget
+
+  = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :info } do
+    - f.text_area :info, class: 'input-xxlarge',
+                                rows: 5,
+                                placeholder: 'Movie description...'
+
+  = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :country } do
+    = f.fields_for :country do |builder|
+      = f.collection_select(:id, @countries, :id, :name, prompt: 'Select country')
+
+  = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :people } do
+    = f.fields_for :creators do |builder|
+      = render 'creator_fields', f: builder
+
+    .links
+      = link_to_add_association 'Add person', f, :creators, class: 'btn btn-small'
+
+  .form-actions
+    = f.submit nil, class: 'btn btn-primary'
+    = link_to t('.cancel', default: t("helpers.links.cancel")), movies_path, class: 'btn'

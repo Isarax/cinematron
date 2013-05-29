@@ -1,0 +1,11 @@
+.nested-fields
+  .control-group
+    .form-inline
+      -# f.number_field :profession_id, placeholder: 'Profession'
+      = f.collection_select(:profession_id, @professions, :id, :name, { prompt: 'Select a profession' })
+
+
+      -# f.number_field :person_id, placeholder: 'Person'
+      = f.collection_select(:person_id, @people, :id, :to_s, { prompt: 'Select a person' })
+
+      = link_to_remove_association "remove", f, class: 'btn btn-danger btn-small'

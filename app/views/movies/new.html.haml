@@ -1,0 +1,8 @@
+- title 'New movie'
+- model_class = Movie
+.page-header
+  %h2= yield :title
+
+= render 'form'
+
+%h3= @movie.errors.each { |error| error }

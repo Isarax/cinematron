@@ -1,0 +1,6 @@
+- if resource.errors[field_name].any? then 'error' end
+%div{ class: ['control-group', "#{'error' if resource.errors[field_name].any?}"] }
+  = f.label field_name, class: 'control-label'
+  .controls
+    = yield
+    %span.help-inline= resource.errors[field_name].first

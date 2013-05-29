@@ -11,6 +11,7 @@
 #  release_date :integer
 #  budget       :integer
 #  info         :text
+#  country_id   :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #

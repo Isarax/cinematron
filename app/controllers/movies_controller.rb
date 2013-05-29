@@ -14,7 +14,7 @@ class MoviesController < ApplicationController
   # GET /movies/1.json
   def show
     @movie = Movie.find(params[:id])
-    @actors = @movie.profession('actor')
+    @actors = @movie.people_with_profession('actor')
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,8 +25,11 @@ class MoviesController < ApplicationController
   # GET /movies/new
   # GET /movies/new.json
   def new
-    @movie = Movie.new(people: [Person.new])
+    @movie = Movie.new
+    #@movie.country.build
     @countries = Country.all
+    @professions = Profession.all
+    @people = Person.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,14 +41,18 @@ class MoviesController < ApplicationController
   def edit
     @movie = Movie.find(params[:id])
     @countries = Country.all
+    @professions = Profession.all
+    @people = Person.all
   end
 
   # POST /movies
   # POST /movies.json
   def create
-    debugger
     @movie = Movie.new(params[:movie])
-    @movie.country = Country.find(params['country']['id'])
+    @countries = Country.all
+    @professions = Profession.all
+    @people = Person.all
+    #@movie.country = Country.find(params['country']['id'])
 
     respond_to do |format|
       if @movie.save
