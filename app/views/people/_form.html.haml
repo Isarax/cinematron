@@ -1,0 +1,27 @@
+.row
+  .span5.offset1
+    - if @person.errors.any?
+      .alert.alert-error
+        The form contains errors.
+
+
+%br
+= form_for @person, html: { class: 'form-horizontal' } do |f|
+  = render layout: 'shared/field', locals: { f: f, resource: @person, field_name: :first_name } do
+    = f.text_field :first_name
+
+  = render layout: 'shared/field', locals: { f: f, resource: @person, field_name: :middle_name } do
+    = f.text_field :middle_name
+
+  = render layout: 'shared/field', locals: { f: f, resource: @person, field_name: :last_name } do
+    = f.text_field :last_name
+
+  = render layout: 'shared/field', locals: { f: f, resource: @person, field_name: :birth_date } do
+    = f.date_select :birth_date
+
+  = render layout: 'shared/field', locals: { f: f, resource: @person, field_name: :country } do
+    = f.collection_select(:country_id, @countries, :id, :name, prompt: 'Select country')
+
+  .form-actions
+    = f.submit nil, class: 'btn btn-primary'
+    = link_to t('.cancel', default: t("helpers.links.cancel")), people_path, class: 'btn'

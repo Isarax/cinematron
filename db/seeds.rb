@@ -6,6 +6,16 @@ countries.each do |country|
   Country.new(name: country).save
 end
 
+# Genres
+
+genres = ['Action', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', 'Documentary', 'Drama', \
+          'Family', 'Fantasy', 'Film-Noir', 'Game-Show', 'History Horror', 'Music', 'Musical', 'Mystery', 'News', \
+          'Reality-TV', 'Romance', 'Sci-Fi', 'Sport', 'Talk-Show', 'Thriller', 'War', 'Western']
+
+genres.each do |genre|
+  Genre.new(name: genre).save
+end
+
 # Professions
 
 professions = ['actor', 'screenwriter', 'director', 'producer']

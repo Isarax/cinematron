@@ -8,41 +8,52 @@
 = form_for @movie, html: { class: 'form-horizontal' } do |f|
 
   = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :name } do
-    - f.text_field :name
+    = f.text_field :name
 
   = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :poster } do
-    - f.text_field :poster
+    = f.text_field :poster
 
   = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :trailer } do
-    - f.text_field :trailer
+    = f.text_field :trailer
 
   = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :min_age } do
-    - f.number_field :min_age
+    = f.number_field :min_age
 
   = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :length } do
-    - f.number_field :length
+    = f.number_field :length
 
   = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :release_date } do
-    - f.number_field :release_date
+    = f.number_field :release_date
 
   = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :budget } do
-    - f.number_field :budget
-
-  = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :info } do
-    - f.text_area :info, class: 'input-xxlarge',
-                                rows: 5,
-                                placeholder: 'Movie description...'
+    = f.number_field :budget
 
   = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :country } do
-    = f.fields_for :country do |builder|
-      = f.collection_select(:id, @countries, :id, :name, prompt: 'Select country')
+    = f.collection_select(:country_id, @countries, :id, :name, prompt: 'Select country')
 
-  = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :people } do
-    = f.fields_for :creators do |builder|
-      = render 'creator_fields', f: builder
+  .control-group
+    = f.label :genres, class: 'control-label'
+    .controls
+      = f.fields_for :genre_movie_joins do |builder|
+        = render 'genre_movie_join_fields', f: builder
+      .links
+        = link_to_add_association 'Add genre', f, :genre_movie_joins, class: 'btn btn-small'
+    -# params[:movie][:genre_movie_joins_attributes].keys.each do |id|
+    -#= params[:movie][:genre_movie_joins_attributes][id][:movie_id]
+    -#= params[:movie][:genre_movie_joins_attributes][id][:genre_id]
 
-    .links
-      = link_to_add_association 'Add person', f, :creators, class: 'btn btn-small'
+  .control-group
+    = f.label :people, class: 'control-label'
+    .controls
+      = f.fields_for :creators do |builder|
+        = render 'creator_fields', f: builder
+      .links
+        = link_to_add_association 'Add person', f, :creators, class: 'btn btn-small'
+
+  = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :info } do
+    = f.text_area :info, class: 'input-xxlarge',
+                                rows: 5,
+                                placeholder: 'Movie description...'
 
   .form-actions
     = f.submit nil, class: 'btn btn-primary'

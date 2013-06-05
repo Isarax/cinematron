@@ -6,12 +6,14 @@
 %table.table.table-striped.table-hover
   %thead
     %tr
-      %th= model_class.human_attribute_name(:name)
-      %th= model_class.human_attribute_name(:min_age)
-      %th= model_class.human_attribute_name(:length)
-      %th= model_class.human_attribute_name(:release_date)
-      %th= model_class.human_attribute_name(:budget)
-      %th= t '.actions', :default => t("helpers.actions")
+      %th Name
+      %th Min age
+      %th Length
+      %th Year
+      %th Budget
+      %th Country
+      %th Genres
+      %th Actions
   %tbody
     - @movies.each do |movie|
       %tr
@@ -20,12 +22,17 @@
         %td= movie.length
         %td= movie.release_date
         %td= movie.budget
+        %td= movie.country.name if movie.country
         %td
-          = link_to 'Edit', edit_movie_path(movie), :class => 'btn btn-mini'
+          -if movie.genres
+            -movie.genres.each do |genre| 
+              = genre.name
+        %td
+          = link_to 'Edit', edit_movie_path(movie), class:'btn btn-mini'
           = link_to 'Destroy',
                       movie_path(movie),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger'
+                      method: :delete,
+                      data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) },
+                      class: 'btn btn-mini btn-danger'
 
 = link_to 'Add new movie', new_movie_path, :class => 'btn btn-primary'

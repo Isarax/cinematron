@@ -26,7 +26,7 @@ class MoviesController < ApplicationController
   # GET /movies/new.json
   def new
     @movie = Movie.new
-    #@movie.country.build
+    @genres = Genre.all
     @countries = Country.all
     @professions = Profession.all
     @people = Person.all
@@ -40,6 +40,7 @@ class MoviesController < ApplicationController
   # GET /movies/1/edit
   def edit
     @movie = Movie.find(params[:id])
+    @genres = Genre.all
     @countries = Country.all
     @professions = Profession.all
     @people = Person.all
@@ -49,10 +50,10 @@ class MoviesController < ApplicationController
   # POST /movies.json
   def create
     @movie = Movie.new(params[:movie])
+    @genres = Genre.all
     @countries = Country.all
     @professions = Profession.all
     @people = Person.all
-    #@movie.country = Country.find(params['country']['id'])
 
     respond_to do |format|
       if @movie.save
@@ -70,6 +71,10 @@ class MoviesController < ApplicationController
   # PUT /movies/1.json
   def update
     @movie = Movie.find(params[:id])
+    @genres = Genre.all
+    @countries = Country.all
+    @professions = Profession.all
+    @people = Person.all
 
     respond_to do |format|
       if @movie.update_attributes(params[:movie])

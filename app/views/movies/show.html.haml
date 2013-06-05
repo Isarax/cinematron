@@ -39,7 +39,7 @@
     %dd= show_field @movie.info
     %dt
       %strong= model_class.human_attribute_name(:country)
-    %dd= show_field @movie.country.name
+    %dd= if @movie.country then @movie.country.name else 'None' end
     %dt
       %strong Actors:
     %dd
