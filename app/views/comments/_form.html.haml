@@ -1,0 +1,6 @@
+= form_for [@commentable, @comment], remote: true do |f|
+  = f.hidden_field :user_id, value: current_user.id
+  = f.text_area :body, class: 'input-xxlarge', |
+                                rows: 5, |
+                                placeholder: 'Your comment...' |
+  = f.submit "Add comment", class: 'btn btn-primary'

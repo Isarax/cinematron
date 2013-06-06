@@ -6,16 +6,16 @@
     %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
     %title= 'Cinematron' + if yield(:title) != '' then ' · ' + yield(:title) else '' end
     = csrf_meta_tags
-    = stylesheet_link_tag "application", :media => "all"
+    = stylesheet_link_tag "application", media: "all"
 
   %body
     .navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
         .container
           %a.btn.btn-navbar{ 'data-target' => '.nav-collapse', 'data-toggle' => 'collapse' }
-            %span.icon-bar">
-            %span.icon-bar">
-            %span.icon-bar">
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
           %a.brand{ href: '/' }
             Cinematron
           .container.nav-collapse

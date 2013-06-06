@@ -17,7 +17,7 @@
     = f.text_field :last_name
 
   = render layout: 'shared/field', locals: { f: f, resource: @person, field_name: :birth_date } do
-    = f.date_select :birth_date
+    = f.date_select :birth_date, start_year: 1850, end_year: Time.now.year  
 
   = render layout: 'shared/field', locals: { f: f, resource: @person, field_name: :country } do
     = f.collection_select(:country_id, @countries, :id, :name, prompt: 'Select country')

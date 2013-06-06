@@ -11,10 +11,10 @@
     = f.text_field :name
 
   = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :poster } do
-    = f.text_field :poster
+    = f.text_field :poster, placeholder: "URL"
 
   = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :trailer } do
-    = f.text_field :trailer
+    = f.text_field :trailer, placeholder: "URL"
 
   = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :min_age } do
     = f.number_field :min_age
@@ -22,11 +22,11 @@
   = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :length } do
     = f.number_field :length
 
-  = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :release_date } do
+  = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :year } do
     = f.number_field :release_date
 
   = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :budget } do
-    = f.number_field :budget
+    = f.number_field :budget, placeholder: "US dollars"
 
   = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :country } do
     = f.collection_select(:country_id, @countries, :id, :name, prompt: 'Select country')
@@ -38,10 +38,7 @@
         = render 'genre_movie_join_fields', f: builder
       .links
         = link_to_add_association 'Add genre', f, :genre_movie_joins, class: 'btn btn-small'
-    -# params[:movie][:genre_movie_joins_attributes].keys.each do |id|
-    -#= params[:movie][:genre_movie_joins_attributes][id][:movie_id]
-    -#= params[:movie][:genre_movie_joins_attributes][id][:genre_id]
-
+        
   .control-group
     = f.label :people, class: 'control-label'
     .controls

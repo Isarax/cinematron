@@ -5,15 +5,15 @@
 
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:first_name) %>:</strong></dt>
-  <dd><%= @person.first_name %></dd>
+  <dd><%= show_field @person.first_name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:middle_name) %>:</strong></dt>
-  <dd><%= @person.middle_name %></dd>
+  <dd><%= show_field @person.middle_name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:last_name) %>:</strong></dt>
-  <dd><%= @person.last_name %></dd>
+  <dd><%= show_field @person.last_name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:birth_date) %>:</strong></dt>
-  <dd><%= @person.birth_date %></dd>
+  <dd><%= show_field @person.birth_date %></dd>
   <dt><strong><%= model_class.human_attribute_name(:country_id) %>:</strong></dt>
-  <dd><%= @person.country_id %></dd>
+  <dd><%= show_field @person.country.name %></dd>
 </dl>
 
 <div class="form-actions">

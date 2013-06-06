@@ -1,4 +1,6 @@
 class MoviesController < ApplicationController
+  load_and_authorize_resource 
+
   # GET /movies
   # GET /movies.json
   def index
@@ -13,8 +15,10 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
+    @comment = Comment.new
     @movie = Movie.find(params[:id])
-    @actors = @movie.people_with_profession('actor')
+    @commentable = @movie
+    @comments = @commentable.comments
 
     respond_to do |format|
       format.html # show.html.erb

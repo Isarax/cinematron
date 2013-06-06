@@ -1,7 +1,6 @@
 .nested-fields
   .control-group
     .form-inline
-      = f.hidden_field(:movie_id, value: @movie.id)
       = f.collection_select(:genre_id, @genres, :id, :name, prompt: 'Select a genre')
 
       = link_to_remove_association "remove", f, class: 'btn btn-danger btn-small'

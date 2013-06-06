@@ -10,6 +10,7 @@ gem 'pg'
 gem 'jquery-rails'
 gem 'figaro'
 gem 'devise'
+gem 'cancan'
 gem 'acts_as_commentable_with_threading'
 
 # Gems used only for assets and not required

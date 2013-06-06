@@ -1,0 +1,4 @@
+if($('#comment_body').val() !=  "") {
+  $('.comments').append('<%= j render "comments/comment", comment: @comment %>');
+  $('#comment_body').val("");
+}

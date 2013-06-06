@@ -10,8 +10,9 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
-//= require jquery_ujs
+// Removed jquery_ujs because of double loading
+//
 //= require twitter/bootstrap
+//= require jquery
 //= require cocoon
 //= require_tree .

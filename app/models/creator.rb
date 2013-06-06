@@ -13,7 +13,6 @@
 class Creator < ActiveRecord::Base
   attr_accessible :id, :movie_id, :profession_id, :person_id
 
-  #validates :movie_id, presence: true
   validates :profession_id, presence: true
   validates :person_id, presence: true
 

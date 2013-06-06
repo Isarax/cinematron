@@ -2,45 +2,65 @@
 - model_class = Movie
 .page-header
   %h2= yield :title
+.row
+  .span-3
+    .image= image_tag @movie.poster, size: "#{300}x#{600}", class: "img-rounded"
 
-.span-3
-  .image= image_tag @movie.poster, size: "#{300}x#{600}", class: "img-rounded"
+    %br
+    %a.trailer{ href: @movie.trailer } Click here to see the trailer
 
-  %br
-  %a.trailer{ href: @movie.trailer } Click here to see the trailer
+    .form-actions
+      = link_to 'Back', movies_path, class: 'btn'
+      - if can? :manage, @movie 
+        = link_to 'Edit', edit_movie_path(@movie), class: 'btn'
+        = link_to 'Delete', @movie, method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger'
 
-  .form-actions
-    = link_to t('.back', :default => t("helpers.links.back")),
-                movies_path, :class => 'btn'
-    = link_to t('.edit', :default => t("helpers.links.edit")),
-                edit_movie_path(@movie), :class => 'btn'
-    = link_to t('.destroy', :default => t("helpers.links.destroy")),
-                movie_path(@movie),
-                :method => 'delete',
-                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                :class => 'btn btn-danger'
+  .span-5
+    %dl.dl-horizontal
+      %dt
+        %strong Min age:
+      %dd= show_field @movie.min_age
+      %dt
+        %strong Length:
+      %dd= show_field @movie.length
+      %dt
+        %strong Year:
+      %dd= show_field @movie.release_date
+      %dt
+        %strong Budget:
+      %dd= show_field @movie.budget
+      %dt
+        %strong Country:
+      %dd= if @movie.country then @movie.country.name else 'None' end
+      %dt
+        %strong Genres:
+      %dd= render 'genres_list', genres: @movie.genres
+      %dt
+        %strong Directors:
+      %dd= render 'people_list', people: @movie.people_with_profession('director')
+      %dt
+        %strong Writers:
+      %dd= render 'people_list', people: @movie.people_with_profession('screenwriter')
+      %dt
+        %strong Producers:
+      %dd= render 'people_list', people: @movie.people_with_profession('producer')
+      %dt
+        %strong Actors:
+      %dd= render 'people_list', people: @movie.people_with_profession('actor')
+      %dt
+        %strong Info:
+      %dd
+        .well.well-small
+          %p{ style: "width:500px;"}= show_field @movie.info
+.row
+  .span5
+    %h3 Comments
+    .comments
+      - @comments.each do |comment|
+        = render "comments/comment", comment: comment
+    - if user_signed_in?
+      = render "comments/form"
+    - else
+      .alert.alert-info
+        Sign in to leave a comment.
 
-.span-6
-  %dl.dl-horizontal
-    %dt
-      %strong= model_class.human_attribute_name(:min_age)
-    %dd= show_field @movie.min_age
-    %dt
-      %strong= model_class.human_attribute_name(:length)
-    %dd= show_field @movie.length
-    %dt
-      %strong= model_class.human_attribute_name(:release_date)
-    %dd= show_field @movie.release_date
-    %dt
-      %strong= model_class.human_attribute_name(:budget)
-    %dd= show_field @movie.budget
-    %dt
-      %strong= model_class.human_attribute_name(:info)
-    %dd= show_field @movie.info
-    %dt
-      %strong= model_class.human_attribute_name(:country)
-    %dd= if @movie.country then @movie.country.name else 'None' end
-    %dt
-      %strong Actors:
-    %dd
-      = render 'people_list', people: @actors

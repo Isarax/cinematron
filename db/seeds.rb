@@ -1,3 +1,17 @@
+# Roles
+roles = ['admin', 'moderator', 'user']
+
+roles.each do |role|
+  Role.new(name: role).save
+end
+
+# Users
+admin = User.new
+admin.email = 'admin@gmail.com'
+admin.password = '132456789'
+admin.save
+admin.roles << Role.where(name: 'admin').first
+
 # Countries
 
 countries = ['USA', 'UK', 'France', 'Italy', 'Russia', 'Japan']

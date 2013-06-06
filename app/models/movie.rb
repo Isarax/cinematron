@@ -34,6 +34,7 @@ class Movie < ActiveRecord::Base
   has_many :genres, through: :genre_movie_joins
   has_many :creators
   has_many :people, through: :creators
+  has_many :comments, as: :commentable
 
   accepts_nested_attributes_for :country
   accepts_nested_attributes_for :genre_movie_joins, :reject_if => :all_blank, :allow_destroy => true

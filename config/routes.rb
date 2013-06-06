@@ -2,7 +2,10 @@ Cinematron::Application.routes.draw do
 
   root :to => 'home#index'
 
-  resources :movies
+  resources :movies do
+    resources :comments
+  end
+  
   resources :people
 
   devise_for :users
