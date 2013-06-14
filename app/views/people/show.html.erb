@@ -13,7 +13,7 @@
   <dt><strong><%= model_class.human_attribute_name(:birth_date) %>:</strong></dt>
   <dd><%= show_field @person.birth_date %></dd>
   <dt><strong><%= model_class.human_attribute_name(:country_id) %>:</strong></dt>
-  <dd><%= show_field @person.country.name %></dd>
+  <dd><%= if @person.country then @person.country.name else 'None' end %></dd>
 </dl>
 
 <div class="form-actions">
