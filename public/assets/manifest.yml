@@ -3,12 +3,10 @@ star.png: star-9b5dc8abfaf936d7240bc130cf95b929.png
 star/index.png: star-9b5dc8abfaf936d7240bc130cf95b929.png
 star_small.png: star_small-0cfe27521c4b77ab89f58329ffc4f6e3.png
 star_small/index.png: star_small-0cfe27521c4b77ab89f58329ffc4f6e3.png
-application.js: application-954f814c527e87357094e3cb4271f00b.js
-application/index.js: application-954f814c527e87357094e3cb4271f00b.js
+application.js: application-26216c320f2ae194c3597b673afa940f.js
+application/index.js: application-26216c320f2ae194c3597b673afa940f.js
 bootstrap.js: bootstrap-b0095fa850f0b646099dbc577e833369.js
 bootstrap/index.js: bootstrap-b0095fa850f0b646099dbc577e833369.js
-reviews.js: reviews-0f36418a56408e609fbea9892fac1a67.js
-reviews/index.js: reviews-0f36418a56408e609fbea9892fac1a67.js
 ajaxful_rating.css: ajaxful_rating-54dab1e5f6021db9ad13c61edcfd956b.css
 ajaxful_rating/index.css: ajaxful_rating-54dab1e5f6021db9ad13c61edcfd956b.css
 application.css: application-cb0af2cbd801dbe1f5dbc5b3291a654b.css
