@@ -1,9 +1,0 @@
-<% if people.empty? %>
-  <%= 'None' %>
-<% else %>
-  <% people, last = people[0..-2], people.last %>
-  <% people.each do |person| %>
-    <%= link_to person, person_path(person)%> ,
-  <% end %>
-  <%= link_to last, person_path(last) %>
-<% end %>

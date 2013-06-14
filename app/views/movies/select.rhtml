@@ -1,3 +1,0 @@
-    <%= create_field(f, @movie, 'Actors') do %>
-      <% collection_select(:creators, :id, @people, :id, :to_s, { include_blank: true, multiple: true }) %>
-    <% end %>

@@ -1,7 +1,0 @@
-<div class="control-group <%= 'error' if resource.errors[field_name].any? %>">
-  <%= f.label field_name, class: 'control-label' %>
-  <div class="controls">
-    <%= yield %>
-    <span class="help-inline"><%= resource.errors[field_name].first %></span>
-  </div>
-</div>

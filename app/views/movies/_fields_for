@@ -1,8 +1,0 @@
-<%= f.fields_for :people do |people_form| %>
-  <%= people_form.label :first_name %>
-  <%= people_form.text_field :first_name %>
-  <%= people_form.label :middle_name %>
-  <%= people_form.text_field :middle_name %>
-  <%= people_form.label :last_name %>
-  <%= people_form.text_field :last_name %>
-<% end %>
