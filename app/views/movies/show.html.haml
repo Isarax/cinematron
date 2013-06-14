@@ -1,61 +1,65 @@
 - title @movie.name
 - model_class = Movie
-.page-header
-  %h2= yield :title
+
 .row
   .span4
-    .image= image_tag @movie.poster
+    = image_tag @movie.poster, onError: "this.onerror=null;this.src='https://lh4.googleusercontent.com/-iHcpcxQcoJ4/UWZNGLcFV2I/AAAAAAAACNE/uNyPZ5j31iY/s330/noImageAvailable.JPG';"
 
-    %br
-    %a.trailer{ href: @movie.trailer } Click here to see the trailer
+    %div{style: "height: 20px;"}
+    .btn-group
+      = link_to 'Back', movies_path, class: 'btn'
+      - if can? :manage, @movie 
+        = link_to 'Edit', edit_movie_path(@movie), class: 'btn'
+        = link_to 'Delete', @movie, method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger'
 
-  .span6
-    = render 'ratings'
-    %dl.dl-horizontal
-      %dt
+  .span8
+    .row
+      .span3
+        %h2= yield :title
+        %a.trailer{ href: @movie.trailer } Click here to see the trailer
+        %br
+        = render 'ratings'
         %strong Min age:
-      %dd= show_field @movie.min_age
-      %dt
+        = show_field @movie.min_age
+        %br
         %strong Length:
-      %dd= show_field @movie.length
-      %dt
+        = show_field @movie.length
+        %br
         %strong Year:
-      %dd= show_field @movie.release_date
-      %dt
+        = show_field @movie.release_date
+        %br
         %strong Budget:
-      %dd= show_field @movie.budget
-      %dt
+        = show_field @movie.budget
+        %br
         %strong Country:
-      %dd= if @movie.country then @movie.country.name else 'None' end
-      %dt
+        = if @movie.country then @movie.country.name else 'None' end
+        %br
         %strong Genres:
-      %dd= render 'genres_list', genres: @movie.genres
-      %dt
-        %strong Directors:
-      %dd= render 'people_list', people: @movie.people_with_profession('director')
-      %dt
-        %strong Writers:
-      %dd= render 'people_list', people: @movie.people_with_profession('screenwriter')
-      %dt
-        %strong Producers:
-      %dd= render 'people_list', people: @movie.people_with_profession('producer')
-      %dt
-        %strong Actors:
-      %dd= render 'people_list', people: @movie.people_with_profession('actor')
-      %dt
-        %strong Info:
-      %dd
-
+        = render 'genres_list', genres: @movie.genres
+      
+      %div{style: "height: 90px;"}
+      .span5
         .well.well-small
+          %strong Directors:
+          %p= render 'people_list', people: @movie.people_with_profession('director')
+        .well.well-small
+          %strong Writers:
+          %p= render 'people_list', people: @movie.people_with_profession('screenwriter')
+        .well.well-small
+          %strong Producers:
+          %p= render 'people_list', people: @movie.people_with_profession('producer')
+      
+    %div{style: "height: 10px;"}
+    .row
+      .span8
+        .well.well-small
+          %strong Actors:
+          %p= render 'people_list', people: @movie.people_with_profession('actor')
+        .well.well-small
+          %strong Info:
           %p= show_field @movie.info
-            
-      .btn-group.offset1
-        = link_to 'Back', movies_path, class: 'btn'
-        - if can? :manage, @movie 
-          = link_to 'Edit', edit_movie_path(@movie), class: 'btn'
-          = link_to 'Delete', @movie, method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger'
 
-%div{style: "height: 60px;"}
+%div{style: "height: 20px;"}
 
 .row
   .tabbable
@@ -67,7 +71,7 @@
 
     .tab-content
       #reviews_tab.tab-pane.active
-        .span5
+        .media.span6
           %h3 Reviews
           .reviews
             - @reviews.each do |review|
@@ -83,7 +87,7 @@
               .alert.alert-info
                 Sign in to leave a review.
       #discussion_tab.tab-pane
-        .span5
+        .media.span6
           %h3 Comments
           .comments
             - @comments.each do |comment|

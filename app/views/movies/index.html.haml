@@ -1,15 +1,24 @@
 - title 'Movies'
 - model_class = Movie
 
-%table.table.table-bordered.table-condensed
-  %tbody
-    - @movies.each_slice(4) do |row|
-      %tr
-        - row.each do |movie|
-          %td
-            = render 'summary', movie: movie
+.thumbnails
+  -#- @movies.each do |movie|
+  -#  %li= render 'summary', movie: movie
+  - @movies.each_slice(4) do |row|
+    %br
+    .row
+      - row.each do |movie|
+        %li.span3
+          = render 'summary', movie: movie  
+-#%table.table.table-bordered.table-condensed
+-#  %tbody
+-#    - @movies.each_slice(4) do |row|
+-#      %tr
+-#        - row.each do |movie|
+-#          %td
+-#            = render 'summary', movie: movie
             
-.pull-right
+.pagination-right
   = paginate @movies
 - if can? :manage, @movies
   = link_to 'Add movie', new_movie_path, :class => 'btn btn-primary'

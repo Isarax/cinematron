@@ -23,8 +23,10 @@ class Ability
         review.user == user
       end
       can :rate, Movie
+      can :search, Movie
     else
       can :read, [Movie, Person, Comment, Review]
+      can :search, Movie
     end
   end
 end

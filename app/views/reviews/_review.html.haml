@@ -1,13 +1,14 @@
-%div{ id: "#{review.id}" }
-  .well.well-small
-    %strong= review.user.name
-    %div{class: "#{review.user.name}-rating"}
-      = ratings_for @reviewable, review.user, show_user_rating: true
-    %p= review.body
-    - if can? :manage, review
-      .btn-group
-        = link_to "Edit", edit_movie_review_path(review.reviewable, review), |
-                            class: 'btn btn-mini', remote: true
-        = link_to "Delete", movie_review_path(review.reviewable, review), |
-                            method: 'delete', confirm: 'Are you sure?', |
-                            class: 'btn btn-danger btn-mini ', remote: true
+%div{ id: "#{review.id}", class: 'well well-small' }
+  %h4.media-header= review.user.name
+  %div{class: "#{review.user.name}-rating"}
+    = ratings_for @reviewable, review.user, show_user_rating: true
+  %br
+  %p= review.body
+  - if can? :manage, review
+    %br
+    .btn-group
+      = link_to "Edit", edit_movie_review_path(review.reviewable, review), |
+                          class: 'btn btn-mini', remote: true
+      = link_to "Delete", movie_review_path(review.reviewable, review), |
+                          method: 'delete', confirm: 'Are you sure?', |
+                          class: 'btn btn-danger btn-mini ', remote: true
