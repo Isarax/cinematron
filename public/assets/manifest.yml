@@ -3,8 +3,8 @@ star.png: star-9b5dc8abfaf936d7240bc130cf95b929.png
 star/index.png: star-9b5dc8abfaf936d7240bc130cf95b929.png
 star_small.png: star_small-0cfe27521c4b77ab89f58329ffc4f6e3.png
 star_small/index.png: star_small-0cfe27521c4b77ab89f58329ffc4f6e3.png
-application.js: application-778166bd0f640a392ee77f30515ad150.js
-application/index.js: application-778166bd0f640a392ee77f30515ad150.js
+application.js: application-954f814c527e87357094e3cb4271f00b.js
+application/index.js: application-954f814c527e87357094e3cb4271f00b.js
 bootstrap.js: bootstrap-b0095fa850f0b646099dbc577e833369.js
 bootstrap/index.js: bootstrap-b0095fa850f0b646099dbc577e833369.js
 reviews.js: reviews-0f36418a56408e609fbea9892fac1a67.js

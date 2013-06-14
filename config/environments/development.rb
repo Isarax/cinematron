@@ -41,9 +41,6 @@ Cinematron::Application.configure do
   # Prevernt double javascript inclusion
   config.serve_static_assets = false
 
-  # Javascript fix for Heroku
-  config.assets.debug = false
-
   config.generators do |g|
     g.template_engine :haml
   end
