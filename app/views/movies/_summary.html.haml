@@ -1,0 +1,9 @@
+.text-center
+  .row{ style: "margin:0 auto;" }
+    %h4= movie.name
+  .row{ style: "margin:0 auto;" }
+    = link_to (image_tag movie.poster, width: 250, height: 250), movie_path(movie)
+  .row{ style: "margin:0 auto;" }
+    = ratings_for movie, :static
+  .row{ style: "margin:0 auto;" }
+    = render 'genres_list', genres: movie.genres

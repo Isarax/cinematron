@@ -1,0 +1,29 @@
+- title 'Sign in'
+
+%h2= yield :title
+
+.row
+  .span5.offset1
+    - if resource.errors.any?
+      .alert.alert-error
+        The form contains errors.
+
+
+= form_for resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal' } do |f|
+  
+  = render layout: 'shared/field', locals: { f: f, resource: resource, field_name: :email } do
+    = f.email_field :email, autofocus: true, class: 'text_field'
+
+  = render layout: 'shared/field', locals: { f: f, resource: resource, field_name: :password } do
+    = f.password_field :password
+
+  - if devise_mapping.rememberable?
+    .checkbox.controls
+      = f.check_box :remember_me 
+      Remember me
+
+  %br
+  .form-actions
+    = f.submit 'Sign in', class: 'btn btn-primary'
+
+.offset1= render "devise/shared/links"

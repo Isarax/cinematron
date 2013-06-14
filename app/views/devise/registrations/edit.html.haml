@@ -1,0 +1,38 @@
+- title 'Edit profile'
+
+%h2= yield :title
+
+.row
+  .span5.offset1
+    - if resource.errors.any?
+      .alert.alert-error
+        The form contains errors.
+
+
+= form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-horizontal' } do |f|
+
+  = render layout: 'shared/field', locals: { f: f, resource: resource, field_name: :name } do
+    = f.text_field :name, autofocus: true
+
+  = render layout: 'shared/field', locals: { f: f, resource: resource, field_name: :email } do
+    = f.email_field :email
+
+  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+    Currently waiting confirmation for: #{ resource.unconfirmed_email }
+
+  = render layout: 'shared/field', locals: { f: f, resource: resource, field_name: :password } do
+    = f.password_field :password, autocomplete: 'off'
+
+  = render layout: 'shared/field', locals: { f: f, resource: resource, field_name: :password_confirmation } do
+    = f.password_field :password_confirmation, autocomplete: 'off'
+
+  = render layout: 'shared/field', locals: { f: f, resource: resource, field_name: :current_password } do
+    = f.password_field :current_password, autocomplete: 'off'
+
+  .form-actions
+    = link_to "Back", :back, class: 'btn'
+    = f.submit "Update", class: 'btn btn-primary'
+
+%br
+%h2 Unhappy?
+%p= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-danger'

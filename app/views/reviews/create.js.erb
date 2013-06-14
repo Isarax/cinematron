@@ -1,0 +1,4 @@
+if($('#review_body').val() !=  "") {
+  $('.reviews').append('<%= j render "reviews/review", review: @review %>');
+  $('.review-form').html('');
+}

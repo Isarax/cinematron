@@ -1,10 +1,10 @@
 class MoviesController < ApplicationController
-  load_and_authorize_resource 
+  load_and_authorize_resource
 
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all
+    @movies = Movie.page(params[:page]).per(8).order('created_at DESC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,9 +16,12 @@ class MoviesController < ApplicationController
   # GET /movies/1.json
   def show
     @comment = Comment.new
+    @review = Review.new
     @movie = Movie.find(params[:id])
     @commentable = @movie
-    @comments = @commentable.comments
+    @comments = @commentable.comments.order(:created_at)
+    @reviewable = @movie
+    @reviews = @reviewable.reviews.order(:created_at)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -101,5 +104,18 @@ class MoviesController < ApplicationController
       format.html { redirect_to movies_url }
       format.json { head :no_content }
     end
+  end
+
+  def rate
+    @movie = Movie.find(params[:id])
+    @movie.rate(params[:stars], current_user, params[:dimension])
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def search
+    @movies = Movie.search(params[:search])
   end
 end

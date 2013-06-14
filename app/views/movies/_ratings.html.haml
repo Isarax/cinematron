@@ -1,0 +1,4 @@
+.ratings
+  %h5 Average rating #{ ratings_for @movie, :static } (#{ @movie.rates.count } votes)
+  - if can? :rate, @movie
+    %h5 Your rating #{ ratings_for @movie, show_user_rating: true }

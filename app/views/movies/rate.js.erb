@@ -1,0 +1,2 @@
+$('.ratings').html('<%= j render "ratings" %>');
+$('.<%= current_user.name %>-rating').html('<%= j ratings_for @movie, current_user, show_user_rating: true %>');

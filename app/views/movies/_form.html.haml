@@ -8,7 +8,7 @@
 = form_for @movie, html: { class: 'form-horizontal' } do |f|
 
   = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :name } do
-    = f.text_field :name
+    = f.text_field :name, autofocus: true
 
   = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :poster } do
     = f.text_field :poster, placeholder: "URL"
@@ -31,7 +31,7 @@
   = render layout: 'shared/field', locals: { f: f, resource: @movie, field_name: :country } do
     = f.collection_select(:country_id, @countries, :id, :name, prompt: 'Select country')
 
-  .control-group
+  %div{ class: ['control-group', "#{'error' if @movie.errors['genre_movie_joins.genre_id'].any?}"] }
     = f.label :genres, class: 'control-label'
     .controls
       = f.fields_for :genre_movie_joins do |builder|
@@ -39,7 +39,7 @@
       .links
         = link_to_add_association 'Add genre', f, :genre_movie_joins, class: 'btn btn-small'
         
-  .control-group
+  %div{ class: ['control-group', "#{'error' if @movie.errors['creators.movie_id'].any?}"] }
     = f.label :people, class: 'control-label'
     .controls
       = f.fields_for :creators do |builder|
@@ -55,3 +55,5 @@
   .form-actions
     = f.submit nil, class: 'btn btn-primary'
     = link_to t('.cancel', default: t("helpers.links.cancel")), movies_path, class: 'btn'
+
+  %h3= @movie.errors.each {|error| error}

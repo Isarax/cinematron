@@ -12,7 +12,9 @@
 class GenreMovieJoin < ActiveRecord::Base
   attr_accessible :id, :movie_id, :genre_id
 
+  validates :movie_id, presence: true
   validates :genre_id, presence: true
+  validates_uniqueness_of :genre_id, scope: [:movie_id], message: 'genres should not repeat'
 
   belongs_to :movie
   belongs_to :genre

@@ -37,4 +37,11 @@ Cinematron::Application.configure do
 
   # Devise email configuration
   config.action_mailer.default_url_options = { host: 'localhost:3000'}
+
+  # Prevernt double javascript inclusion
+  config.serve_static_assets = false
+
+  config.generators do |g|
+    g.template_engine :haml
+  end
 end

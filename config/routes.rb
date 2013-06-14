@@ -1,16 +1,23 @@
 Cinematron::Application.routes.draw do
 
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
   root :to => 'home#index'
 
   resources :movies do
     resources :comments
+    resources :reviews
+    member do
+      post :rate
+    end
+    get 'page/:page', action: :index, on: :collection
   end
+  get '/search', action: :search, controller: :movies
   
   resources :people
 
   devise_for :users
   get "users/new"
-
 
   #get "home/index"
 

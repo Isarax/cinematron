@@ -3,19 +3,14 @@
 .page-header
   %h2= yield :title
 .row
-  .span-3
-    .image= image_tag @movie.poster, size: "#{300}x#{600}", class: "img-rounded"
+  .span4
+    .image= image_tag @movie.poster
 
     %br
     %a.trailer{ href: @movie.trailer } Click here to see the trailer
 
-    .form-actions
-      = link_to 'Back', movies_path, class: 'btn'
-      - if can? :manage, @movie 
-        = link_to 'Edit', edit_movie_path(@movie), class: 'btn'
-        = link_to 'Delete', @movie, method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger'
-
-  .span-5
+  .span6
+    = render 'ratings'
     %dl.dl-horizontal
       %dt
         %strong Min age:
@@ -50,17 +45,51 @@
       %dt
         %strong Info:
       %dd
-        .well.well-small
-          %p{ style: "width:500px;"}= show_field @movie.info
-.row
-  .span5
-    %h3 Comments
-    .comments
-      - @comments.each do |comment|
-        = render "comments/comment", comment: comment
-    - if user_signed_in?
-      = render "comments/form"
-    - else
-      .alert.alert-info
-        Sign in to leave a comment.
 
+        .well.well-small
+          %p= show_field @movie.info
+            
+      .btn-group.offset1
+        = link_to 'Back', movies_path, class: 'btn'
+        - if can? :manage, @movie 
+          = link_to 'Edit', edit_movie_path(@movie), class: 'btn'
+          = link_to 'Delete', @movie, method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger'
+
+%div{style: "height: 60px;"}
+
+.row
+  .tabbable
+    %ul.nav.nav-tabs
+      %li.active
+        %a{ href: "#reviews_tab", 'data-toggle' => 'tab' } Reviews
+      %li 
+        %a{ href: "#discussion_tab", 'data-toggle' => 'tab' } Discussion
+
+    .tab-content
+      #reviews_tab.tab-pane.active
+        .span5
+          %h3 Reviews
+          .reviews
+            - @reviews.each do |review|
+              = render "reviews/review", review: review
+          %div{ class: 'review-form' }
+            - if user_signed_in?
+              - if @reviews.any? { |r| r.user_id == current_user.id }
+                .alert.alert-info
+                  You already left a review.
+              - else
+                = render "reviews/form", reviewable: @reviewable, review: @review
+            - else
+              .alert.alert-info
+                Sign in to leave a review.
+      #discussion_tab.tab-pane
+        .span5
+          %h3 Comments
+          .comments
+            - @comments.each do |comment|
+              = render "comments/comment", comment: comment
+          - if user_signed_in?
+            = render "comments/form"
+          - else
+            .alert.alert-info
+              Sign in to leave a comment.

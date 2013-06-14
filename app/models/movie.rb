@@ -18,6 +18,7 @@
 
 class Movie < ActiveRecord::Base
   acts_as_commentable
+  ajaxful_rateable stars: 10, allow_update: true
   
   attr_accessible :name, :poster, :trailer, :min_age, :release_date, :length, \
                   :budget, :info, :country_id, :country_attributes, \
@@ -35,6 +36,7 @@ class Movie < ActiveRecord::Base
   has_many :creators
   has_many :people, through: :creators
   has_many :comments, as: :commentable
+  has_many :reviews, as: :reviewable
 
   accepts_nested_attributes_for :country
   accepts_nested_attributes_for :genre_movie_joins, :reject_if => :all_blank, :allow_destroy => true
@@ -42,5 +44,13 @@ class Movie < ActiveRecord::Base
 
   def people_with_profession(name)
     Person.joins(:movies).where('creators.profession_id = (?)', Profession.where(name: name).first.id).where(movies: { name: self.name })
+  end
+
+  def self.search(search)
+    if search
+      where('name LIKE ?', "%#{search}%")
+    else
+      scoped
+    end
   end
 end

@@ -1,35 +1,15 @@
 - title 'Movies'
 - model_class = Movie
-.page-header
-  %h2= yield :title
 
-%table.table.table-striped.table-hover
-  %thead
-    %tr
-      %th Name
-      %th Min age
-      %th Length
-      %th Year
-      %th Budget
-      %th Country
-      - if can? :manage, @movies
-        %th Actions
+%table.table.table-bordered.table-condensed
   %tbody
-    - @movies.each do |movie|
+    - @movies.each_slice(4) do |row|
       %tr
-        %td= link_to movie.name, movie_path(movie)
-        %td= movie.min_age
-        %td= movie.length
-        %td= movie.release_date
-        %td= movie.budget
-        %td= movie.country.name if movie.country
-        - if can? :manage, @movies
+        - row.each do |movie|
           %td
-            = link_to 'Edit', edit_movie_path(movie), class:'btn btn-mini'
-            = link_to 'Destroy',
-                        movie_path(movie),
-                        method: :delete,
-                        data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) },
-                        class: 'btn btn-mini btn-danger'
-
-= link_to 'Add new movie', new_movie_path, :class => 'btn btn-primary'
+            = render 'summary', movie: movie
+            
+.pull-right
+  = paginate @movies
+- if can? :manage, @movies
+  = link_to 'Add movie', new_movie_path, :class => 'btn btn-primary'

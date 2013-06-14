@@ -2,5 +2,5 @@
   .control-group
     .form-inline
       = f.collection_select(:genre_id, @genres, :id, :name, prompt: 'Select a genre')
-
       = link_to_remove_association "remove", f, class: 'btn btn-danger btn-small'
+      %span.help-inline= @movie.errors['genre_movie_joins.genre_id'].first
