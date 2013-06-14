@@ -6,6 +6,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require cocoon
 //= require twitter/bootstrap
+//= require cocoon
 //= require_tree .
