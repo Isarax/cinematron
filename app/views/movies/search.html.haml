@@ -1,33 +1,93 @@
-= form_tag({ action: :search, controller: :movies }, method: :get) do
-  .form-inline
-    = text_field_tag :search, params[:search]
-    = submit_tag "Search", name: nil, class: 'btn btn-primary'
+- title 'Movies search'
 
-%table.table.table-striped.table-hover
-  %thead
-    %tr
-      %th Name
-      %th Min age
-      %th Length
-      %th Year
-      %th Budget
-      %th Country
-      - if can? :manage, @movies
-        %th Actions
-  %tbody
-    - @movies.each do |movie|
+.page-header
+  %h2= 'Search'
+
+= form_tag({ action: :search, controller: :movies }, method: :get) do
+  .form-horizontal
+    .row
+      .span
+        .control-group
+          .control-label= label_tag 'Name:'
+          .controls
+            = text_field_tag :name, params[:name]
+    .row
+      .span4
+        .control-group
+          .control-label= label_tag 'Genre:'
+          .controls
+            = collection_select :movie, :genre_id, @genres, :id, :name, { prompt: 'Select genre', |
+                                      selected: if params[:movie].present? then params[:movie][:genre_id] end }
+      .span4
+        .control-group
+          .control-label= label_tag 'Country:'
+          .controls
+            = collection_select :movie, :country_id, @countries, :id, :name, { prompt: 'Select country', |
+                                        selected: if params[:movie].present? then params[:movie][:country_id] end }
+    .row
+      .span4
+        .control-group
+          .control-label= label_tag 'Min age:'
+          .controls
+            = number_field_tag :min_age, params[:min_age]
+            %br
+            .form-inline
+              = label_tag 'less'
+              = radio_button_tag :min_age_op, '<', params[:min_age].present? && params[:min_age_op] == '<'
+              = label_tag 'equal'
+              = radio_button_tag :min_age_op, '=', params[:min_age].present? && params[:min_age_op] == '=' || !params[:min_age].present?
+              = label_tag 'more'
+              = radio_button_tag :min_age_op, '>', params[:min_age].present? && params[:min_age_op] == '>'
+      .span4
+        .control-group
+          .control-label= label_tag 'Year:'
+          .controls
+            = number_field_tag :year, params[:year]
+            %br
+            .form-inline
+              = label_tag 'less'
+              = radio_button_tag :year_op, '<', params[:year].present? && params[:year_op] == '<'
+              = label_tag 'equal'
+              = radio_button_tag :year_op, '=', params[:year].present? && params[:year_op] == '=' || !params[:year].present?
+              = label_tag 'more'
+              = radio_button_tag :year_op, '>', params[:year].present? && params[:year_op] == '>'
+    .row
+      .span
+        .control-group
+          .control-label= label_tag 'Person:'
+          .controls
+            = collection_select :movie, :person_id, @people, :id, :to_s, { prompt: 'Select person', |
+                                          selected: if params[:movie].present? then params[:movie][:person_id] end }
+    .row
+      .offset1= submit_tag 'Search', class: 'btn btn-primary btn-large'
+
+%div{style: "height: 20px;"}
+.span10.offset1
+  %table.table.table-striped.table-hover
+    %thead
       %tr
-        %td= link_to movie.name, movie_path(movie)
-        %td= movie.min_age
-        %td= movie.length
-        %td= movie.release_date
-        %td= movie.budget
-        %td= movie.country.name if movie.country
-        - if can? :manage, @movies
-          %td
-            = link_to 'Edit', edit_movie_path(movie), class:'btn btn-mini'
-            = link_to 'Destroy',
-                        movie_path(movie),
-                        method: :delete,
-                        data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) },
-                        class: 'btn btn-mini btn-danger'
+        %th Name
+        %th Min age
+        %th Length
+        %th Year
+        %th Budget
+        %th Country
+        - if can? :manage, Movie
+          %th Actions
+    %tbody
+      - @movies.each do |movie|
+        %tr
+          %td= link_to movie.name, movie_path(movie)
+          %td= movie.min_age
+          %td= movie.length
+          %td= movie.release_date
+          %td= movie.budget
+          %td= movie.country.name if movie.country
+          - if can? :manage, Movie
+            %td
+              = link_to 'Edit', edit_movie_path(movie), class:'btn btn-mini'
+              = link_to 'Destroy',
+                          movie_path(movie),
+                          method: :delete,
+                          data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) },
+                          class: 'btn btn-mini btn-danger'

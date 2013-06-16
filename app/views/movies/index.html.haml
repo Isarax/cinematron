@@ -20,5 +20,5 @@
             
 .pagination-right
   = paginate @movies
-- if can? :manage, @movies
+- if can? :manage, Movie
   = link_to 'Add movie', new_movie_path, :class => 'btn btn-primary'

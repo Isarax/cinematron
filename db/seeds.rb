@@ -13,6 +13,13 @@ admin.password = '123456789'
 admin.role = Role.where(name: 'admin').first
 admin.save
 
+moderator = User.new
+admin.name = 'Moderator'
+admin.email = 'moderator@gmail.com'
+admin.password = '123456789'
+admin.role = Role.where(name: 'moderator').first
+admin.save
+
 
 # Countries
 

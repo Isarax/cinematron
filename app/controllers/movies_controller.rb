@@ -116,6 +116,9 @@ class MoviesController < ApplicationController
   end
 
   def search
-    @movies = Movie.search(params[:search])
+    @movies = Movie.search(params)
+    @countries = Country.all
+    @genres = Genre.all
+    @people = Person.all
   end
 end

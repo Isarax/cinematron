@@ -8,7 +8,7 @@
     %div{style: "height: 20px;"}
     .btn-group
       = link_to 'Back', movies_path, class: 'btn'
-      - if can? :manage, @movie 
+      - if can? :manage, Movie
         = link_to 'Edit', edit_movie_path(@movie), class: 'btn'
         = link_to 'Delete', @movie, method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger'
 
@@ -17,8 +17,9 @@
       .span3
         %h2= yield :title
         %a.trailer{ href: @movie.trailer } Click here to see the trailer
-        %br
+        %div{style: "height: 20px;"}
         = render 'ratings'
+        %div{style: "height: 20px;"}
         %strong Min age:
         = show_field @movie.min_age
         %br
@@ -33,12 +34,12 @@
         %br
         %strong Country:
         = if @movie.country then @movie.country.name else 'None' end
-        %br
-        %strong Genres:
-        = render 'genres_list', genres: @movie.genres
       
-      %div{style: "height: 90px;"}
+      %div{style: "height: 20px;"}
       .span5
+        .well.well-small
+          %strong Genres:
+          %p= render 'genres_list', genres: @movie.genres
         .well.well-small
           %strong Directors:
           %p= render 'people_list', people: @movie.people_with_profession('director')
@@ -49,7 +50,6 @@
           %strong Producers:
           %p= render 'people_list', people: @movie.people_with_profession('producer')
       
-    %div{style: "height: 10px;"}
     .row
       .span8
         .well.well-small
@@ -60,7 +60,6 @@
           %p= show_field @movie.info
 
 %div{style: "height: 20px;"}
-
 .row
   .tabbable
     %ul.nav.nav-tabs

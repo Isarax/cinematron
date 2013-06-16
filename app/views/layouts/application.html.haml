@@ -22,8 +22,13 @@
             Cinematron
           .container.nav-collapse
             %ul.nav
-              %li{ class: if params[:controller] == 'movies' then 'active' end }= link_to "Movies", movies_path
-              %li{ class: if params[:controller] == 'people' then 'active' end }= link_to "People", people_path
+              %li.dropdown
+                %a.dropdown-toggle{ 'data-toggle' => 'dropdown', href: '#' }
+                  Movies
+                %ul.dropdown-menu{ role: 'menu', 'aria-labelledby' => 'dLabel' }
+                  %li= link_to "Movies", movies_path
+                  %li= link_to "Search", '/movies_search'
+              %li= link_to "People", people_path
             %ul.nav.pull-right
               - if user_signed_in?
                 %li.dropdown

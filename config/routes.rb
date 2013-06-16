@@ -12,7 +12,7 @@ Cinematron::Application.routes.draw do
     end
     get 'page/:page', action: :index, on: :collection
   end
-  get '/search', action: :search, controller: :movies
+  get '/movies_search', action: :search, controller: :movies
   
   resources :people
 

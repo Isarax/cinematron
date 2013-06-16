@@ -5,7 +5,7 @@
     = link_to (image_tag movie.poster, style: "max-height:385px; max-width:270px;", |
                 onError: "this.onerror=null; |
                           this.src='https://lh4.googleusercontent.com/-iHcpcxQcoJ4/UWZNGLcFV2I/AAAAAAAACNE/uNyPZ5j31iY/s330/noImageAvailable.JPG';"), |
-              movie_path(movie), class: 'thumbnail'
+              movie_path(movie)
   .row{ style: "margin:0 auto;" }
     = ratings_for movie, :static
   .row{ style: "margin:0 auto;" }
