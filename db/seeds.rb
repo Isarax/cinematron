@@ -6,19 +6,31 @@ roles.each do |role|
 end
 
 # Users
-admin = User.new
-admin.name = 'Admin'
-admin.email = 'admin@gmail.com'
-admin.password = '123456789'
-admin.role = Role.where(name: 'admin').first
-admin.save
+(admin = User.new do |a|
+  a.name = 'Admin'
+  a.email = 'admin@gmail.com'
+  a.password = '123456789'
+  a.role = Role.where(name: 'admin').first
+end).save
 
-moderator = User.new
-admin.name = 'Moderator'
-admin.email = 'moderator@gmail.com'
-admin.password = '123456789'
-admin.role = Role.where(name: 'moderator').first
-admin.save
+(moderator = User.new do |m|
+  m.name = 'Moderator'
+  m.email = 'moderator@gmail.com'
+  m.password = '123456789'
+  m.role = Role.where(name: 'moderator').first
+end).save
+
+number = 1
+
+20.times do
+  User.new do |u|
+    u.name = 'dummy' + number.to_s
+    u.email = u.name + '@gmail.com'
+    u.password = '123456789'
+  end.save
+
+  number += 1
+end
 
 
 # Countries
@@ -64,23 +76,22 @@ length = 30
 budget = 10000
 release_date = 1980
 posters = [
-'http://glowgaze.com/forum/attachment.php?attachmentid=17404&d=1371048814',
-'http://glowgaze.com/forum/attachment.php?attachmentid=17369&d=1370642679',
-'http://glowgaze.com/forum/attachment.php?attachmentid=17288&d=1370328752',
-'http://glowgaze.com/forum/attachment.php?attachmentid=17097&d=1368547409',
-'http://glowgaze.com/forum/attachment.php?attachmentid=17077&d=1369689183',
-'http://glowgaze.com/forum/attachment.php?attachmentid=13721&d=1366705165',
-'http://glowgaze.com/forum/attachment.php?attachmentid=13554&d=1366559822',
-'http://glowgaze.com/forum/attachment.php?attachmentid=13326&d=1362904986',
-'http://glowgaze.com/forum/attachment.php?attachmentid=13219&d=1365718976',
-'http://glowgaze.com/forum/attachment.php?attachmentid=10958&d=1364285250',
-'http://glowgaze.com/forum/attachment.php?attachmentid=9029&d=1358549348',
-'http://glowgaze.com/forum/attachment.php?attachmentid=8860&d=1357121812',
-'http://glowgaze.com/forum/attachment.php?attachmentid=6691&d=1358203320',
-'http://glowgaze.com/forum/attachment.php?attachmentid=6046&d=1356931494']
-
+  'http://glowgaze.com/forum/attachment.php?attachmentid=17404&d=1371048814',
+  'http://glowgaze.com/forum/attachment.php?attachmentid=17369&d=1370642679',
+  'http://glowgaze.com/forum/attachment.php?attachmentid=17288&d=1370328752',
+  'http://glowgaze.com/forum/attachment.php?attachmentid=17097&d=1368547409',
+  'http://glowgaze.com/forum/attachment.php?attachmentid=17077&d=1369689183',
+  'http://glowgaze.com/forum/attachment.php?attachmentid=13721&d=1366705165',
+  'http://glowgaze.com/forum/attachment.php?attachmentid=13554&d=1366559822',
+  'http://glowgaze.com/forum/attachment.php?attachmentid=13326&d=1362904986',
+  'http://glowgaze.com/forum/attachment.php?attachmentid=13219&d=1365718976',
+  'http://glowgaze.com/forum/attachment.php?attachmentid=10958&d=1364285250',
+  'http://glowgaze.com/forum/attachment.php?attachmentid=9029&d=1358549348',
+  'http://glowgaze.com/forum/attachment.php?attachmentid=8860&d=1357121812',
+  'http://glowgaze.com/forum/attachment.php?attachmentid=6691&d=1358203320',
+  'http://glowgaze.com/forum/attachment.php?attachmentid=6046&d=1356931494']
 trailer = 'http://www.youtube.com/watch?v=dQw4w9WgXcQ'
-info = %Q{ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor \
+lorem = %Q{ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor \
           incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud \
           exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute \
           irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla \
@@ -97,7 +108,7 @@ info = %Q{ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius
     m.budget = budget
     m.release_date = release_date
     m.country = Country.where(name: countries.sample).first
-    m.info = info
+    m.info = lorem
     2.times { m.genres << Genre.where(name: genres.sample).first }
   end.save
 
@@ -117,4 +128,38 @@ Movie.all.each do |m|
       c.person = tarantino
     end.save
   end
+end
+
+# Comments
+comments = [
+  'Liked it.',
+  'I would not reccomend it to anyone.',
+  'I was expecting more.',
+  'This movie is so good, I\'m gonna watch it second time.',
+  'Book was soooo much better.']
+
+100.times do
+  user = User.all.sample.id
+  movie = Movie.all.sample.id
+
+  Rate.new do |r|
+    r.rater_id = user
+    r.rateable_type = 'Movie'
+    r.rateable_id = movie
+    r.stars = (1..10).to_a.sample
+  end.save
+
+  Review.new do |r|
+    r.user_id = user
+    r.reviewable_type = 'Movie'
+    r.reviewable_id = movie
+    r.body = lorem
+  end.save
+
+  Comment.new do |c|
+    c.user_id = user
+    c.commentable_type = 'Movie'
+    c.commentable_id = movie
+    c.body = comments.sample
+  end.save
 end

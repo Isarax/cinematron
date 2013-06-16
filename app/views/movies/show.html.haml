@@ -7,7 +7,7 @@
 
     %div{style: "height: 20px;"}
     .btn-group
-      = link_to 'Back', movies_path, class: 'btn'
+      = link_to 'Back', :back, class: 'btn'
       - if can? :manage, Movie
         = link_to 'Edit', edit_movie_path(@movie), class: 'btn'
         = link_to 'Delete', @movie, method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger'
@@ -16,7 +16,7 @@
     .row
       .span3
         %h2= yield :title
-        %a.trailer{ href: @movie.trailer } Click here to see the trailer
+        %a.trailer{ href: @movie.trailer } Click here to watch the trailer
         %div{style: "height: 20px;"}
         = render 'ratings'
         %div{style: "height: 20px;"}

@@ -59,6 +59,7 @@
             = collection_select :movie, :person_id, @people, :id, :to_s, { prompt: 'Select person', |
                                           selected: if params[:movie].present? then params[:movie][:person_id] end }
     .row
+      %div{style: "height: 20px;"}
       .offset1= submit_tag 'Search', class: 'btn btn-primary btn-large'
 
 %div{style: "height: 20px;"}
