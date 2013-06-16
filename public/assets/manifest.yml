@@ -3,10 +3,6 @@ star.png: star-84a89c88f502a3b12c36b5e202f02b7e.png
 star/index.png: star-84a89c88f502a3b12c36b5e202f02b7e.png
 star1.png: star1-9b5dc8abfaf936d7240bc130cf95b929.png
 star1/index.png: star1-9b5dc8abfaf936d7240bc130cf95b929.png
-star2.png: star2-6cd9e8f72742fedf69e758364f32f4f3.png
-star2/index.png: star2-6cd9e8f72742fedf69e758364f32f4f3.png
-star3.png: star3-6d1ecf222ab2df45c0c457fb70a85c5c.png
-star3/index.png: star3-6d1ecf222ab2df45c0c457fb70a85c5c.png
 star_small.png: star_small-0cfe27521c4b77ab89f58329ffc4f6e3.png
 star_small/index.png: star_small-0cfe27521c4b77ab89f58329ffc4f6e3.png
 application.js: application-eeb65e6c33f083feb37c1aae7cccfbf1.js
