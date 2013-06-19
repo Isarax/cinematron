@@ -7,7 +7,7 @@
 
     %div{style: "height: 20px;"}
     .btn-group
-      = link_to 'Back', :back, class: 'btn'
+      = link_to 'Back to movies', movies_path, class: 'btn'
       - if can? :manage, Movie
         = link_to 'Edit', edit_movie_path(@movie), class: 'btn'
         = link_to 'Delete', @movie, method: :delete, confirm: 'Are you sure?', class: 'btn btn-danger'
