@@ -63,8 +63,7 @@ ActiveRecord::Schema.define(:version => 20130613092221) do
     t.string   "trailer"
     t.integer  "min_age"
     t.integer  "length"
-    t.integer  "release_date"
-    t.integer  "budget"
+    t.date     "release_date"
     t.text     "info"
     t.integer  "country_id"
     t.datetime "created_at",   :null => false

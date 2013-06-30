@@ -71,7 +71,6 @@
         %th Min age
         %th Length
         %th Year
-        %th Budget
         %th Country
         - if can? :manage, Movie
           %th Actions
@@ -82,7 +81,6 @@
           %td= movie.min_age
           %td= movie.length
           %td= movie.release_date
-          %td= movie.budget
           %td= movie.country.name if movie.country
           - if can? :manage, Movie
             %td

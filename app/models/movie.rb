@@ -28,7 +28,6 @@ class Movie < ActiveRecord::Base
   validates :min_age, presence: true, numericality: { only_integer: true }, inclusion: { in: 0..21 }
   validates :release_date, presence: true
   validates :length, presence: true, numericality: { only_integer: true }, inclusion: { in: 0..400 }
-  validates :budget, presence: true, numericality: { only_integer: true }
 
   belongs_to :country
   has_many :genre_movie_joins
@@ -50,7 +49,7 @@ class Movie < ActiveRecord::Base
     movies = Movie.order(:name)
     movies = movies.where('name ilike ?', "%#{params[:name]}%") if params[:name].present?
     movies = movies.where("min_age #{params[:min_age_op]} ?", params[:min_age]) if params[:min_age].present?
-    movies = movies.where("release_date #{params[:year_op]} ?", params[:year]) if params[:year].present?
+    movies = movies.where("release_date #{params[:year_op]} ?", Date.new(params[:year].to_i)) if params[:year].present?
 
     if params[:movie].present? && params[:movie][:country_id].present?
       movies = movies.where('country_id = ?', params[:movie][:country_id])

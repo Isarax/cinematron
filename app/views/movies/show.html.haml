@@ -26,14 +26,11 @@
         %strong Length:
         = show_field @movie.length
         %br
-        %strong Year:
-        = show_field @movie.release_date
-        %br
-        %strong Budget:
-        = show_field @movie.budget
-        %br
         %strong Country:
         = if @movie.country then @movie.country.name else 'None' end
+        %br
+        %strong Release date:
+        = show_field @movie.release_date
       
       %div{style: "height: 20px;"}
       .span5

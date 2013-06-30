@@ -4,10 +4,11 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.page(params[:page]).per(8).order('created_at DESC')
+    @movies = Movie.page(params[:page]).per(8).order('release_date DESC')
 
     respond_to do |format|
       format.html # index.html.erb
+      format.js
       format.json { render json: @movies }
     end
   end

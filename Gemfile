@@ -16,6 +16,10 @@ gem 'rails_admin'
 gem 'ajaxful_rating',  '>= 3.0.0.beta8'
 gem 'kaminari'
 gem 'cocoon'
+#gem 'jquery-ui-bootstrap-rails'
+
+# good but incompatible with other gems
+# gem 'turbolinks'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -30,7 +34,7 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 
   # Javascript engine
-  gem 'therubyracer', :platforms => :ruby
+  gem 'therubyracer', platforms: :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -41,6 +45,8 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
+  gem 'pry'
+  gem 'pry-doc'
 end
 
 # To use ActiveModel has_secure_password

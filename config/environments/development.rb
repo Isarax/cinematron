@@ -44,4 +44,12 @@ Cinematron::Application.configure do
   config.generators do |g|
     g.template_engine :haml
   end
+
+  silence_warnings do
+    begin
+      require 'pry'
+      IRB = Pry
+      rescue LoadError
+    end
+  end
 end

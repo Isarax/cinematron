@@ -6,8 +6,7 @@ class CreateMovies < ActiveRecord::Migration
       t.string :trailer
       t.integer :min_age
       t.integer :length
-      t.integer :release_date
-      t.integer :budget
+      t.date :release_date
       t.text :info
 
       t.references :country, index: true
