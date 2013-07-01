@@ -28,12 +28,4 @@ class CommentsController < ApplicationController
     resource, id = request.path.split('/')[1, 2]
     @commentable = resource.singularize.classify.constantize.find(id)
   end
-
-  #def get_commentable
-  #  @commentable = params[:commentable].classify.constantize.find(commentable_id)
-  #end
-
-  #def commentable_id
-  #  params[(params[:commentable].singularize + "_id").to_sym]
-  #end
 end

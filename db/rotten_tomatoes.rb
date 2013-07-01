@@ -2,9 +2,6 @@ class RottenTomatoes
   require 'net/http'
   require 'json'
 
-  ENV['RAILS_ENV'] = ARGV.first || ENV['RAILS_ENV'] || 'development'
-  require File.expand_path(File.dirname(__FILE__) + "../../../config/environment")
-
   @@site = 'http://api.rottentomatoes.com/api/public/v1.0'
   @@api_key = '.json?apikey=8eerxqsuqspnt3ma2rpem5mn'
 
@@ -66,14 +63,14 @@ class RottenTomatoes
     end
   end
 
-  def self.leech(id, number)
+  def self.leech_from(id, number)
     while number > 0 do
       if leech_movie(id)
         number -= 1
-        puts "Movie with id #{id} leeched succesfully."
+        "Movie with id #{id} leeched succesfully."
       end
       id += 1
-      puts "id: #{id}"
+      "id: #{id}"
     end
     puts "Last id: #{id}."
   end

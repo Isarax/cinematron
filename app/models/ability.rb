@@ -9,8 +9,6 @@ class Ability
     elsif user.role? 'moderator'
       can :manage, [Movie, Person, Review, Comment, Genre, Country, Profession]
       can :manage, User do |user|
-        #roles = user.roles.map { |role| role.name }
-        #!roles.include?(:admin) && !roles.include?(:moderator)
         !user.role?('admin') && user.role?('moderator')
       end
     elsif user.role? 'user'

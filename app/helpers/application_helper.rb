@@ -3,18 +3,6 @@ module ApplicationHelper
     content_for(:title) { page_title }
   end
 
-  def create_field(builder, resource, field_name)
-    %Q{
-      <div class="control-group #{ 'error' if resource.errors[field_name].any? } ">
-        #{ builder.label field_name, class: 'control-label' }
-        <div class="controls">
-          #{ yield }
-          <span class="help-inline"> #{ resource.errors[field_name].first } </span>
-        </div>
-      </div>
-    }.html_safe
-  end
-
   def show_field(field)
     unless field.blank? 
       field
